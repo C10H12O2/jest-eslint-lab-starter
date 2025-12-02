@@ -38,3 +38,25 @@ describe('filterActiveUsers', () => {
     });
 });
 
+describe('logAction', () => {
+    test("generates the correct log string for valid inputs", () => {
+        const action = "login";
+        const username = "Alice";
+        const result = logAction(action, username);
+
+        expect(result).toMatch(/User Alice performed a login at/);
+    });
+
+    test("handles missing action", () => {
+        const result = logAction("", "Alice");
+        expect(result).toMatch(/User Alice performed  at /);
+    });
+
+    test("handles missing username", () => {
+        const result = logAction("logout", "");
+        expect(result).toMatch(/User  performed logout at /);
+    });
+
+});
+
+
